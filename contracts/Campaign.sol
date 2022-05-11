@@ -2,6 +2,13 @@
 pragma solidity ^0.8.9;
 
 contract Campaign {
+    struct Request {
+        string description;
+        uint256 value;
+        address recipient;
+        bool complete;
+    }
+
     address public manager;
     uint256 public minimumContribution;
     address[] public approvers;
