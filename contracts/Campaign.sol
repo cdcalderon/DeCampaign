@@ -35,7 +35,7 @@ contract Campaign {
         uint256 value,
         address recipient
     ) public restricted {
-        Request memory newRequest = Request({
+        Request storage newRequest = Request({
             description: description,
             value: value,
             recipient: recipient,
