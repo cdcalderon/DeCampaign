@@ -7,9 +7,13 @@ contract Campaign {
         uint256 value;
         address recipient;
         bool complete;
+        uint256 approvalCount;
+        mapping(address => bool) approvals;
     }
 
-    Request[] public requests;
+    uint256 numRequests;
+    mapping(uint256 => Request) requests;
+
     address public manager;
     uint256 public minimumContribution;
     mapping(address => bool) approvers;
@@ -35,13 +39,11 @@ contract Campaign {
         uint256 value,
         address recipient
     ) public restricted {
-        Request memory newRequest = Request({
-            description: description,
-            value: value,
-            recipient: recipient,
-            complete: false
-        });
-
-        requests.push(newRequest);
+        Request storage r = requests[numRequests++];
+        r.description = description;
+        r.value = value;
+        r.recipient = recipient;
+        r.complete = false;
+        r.approvalCount = 0;
     }
 }
