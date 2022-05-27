@@ -46,4 +46,6 @@ contract Campaign {
         r.complete = false;
         r.approvalCount = 0;
     }
+
+    function approveRequest(uint256 index) public {}
 }
