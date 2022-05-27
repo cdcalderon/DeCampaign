@@ -48,9 +48,12 @@ contract Campaign {
     }
 
     function approveRequest(uint256 index) public {
-        require(approvers[msg.sender]);
-        require(!requests[index].approvals[msg.sender]);
+        Request storage request = requests[index];
 
-        requests[index].approvalCount++;
+        require(approvers[msg.sender]); // calling is a donator
+        require(!request.approvals[msg.sender]); // has not voted yet
+
+        request.approvals[msg.sender] = true;
+        request.approvalCount++;
     }
 }
