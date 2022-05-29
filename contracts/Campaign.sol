@@ -57,5 +57,5 @@ contract Campaign {
         request.approvalCount++;
     }
 
-    function finalizeRequest() public {}
+    function finalizeRequest() public restricted {}
 }
