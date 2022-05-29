@@ -56,4 +56,6 @@ contract Campaign {
         request.approvals[msg.sender] = true;
         request.approvalCount++;
     }
+
+    function finalizeRequest() public {}
 }
