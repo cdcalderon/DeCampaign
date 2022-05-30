@@ -69,6 +69,7 @@ contract Campaign {
         // require(request.approvalCount > (approversCount / 2));
         require(!request.complete);
 
+        (request.recipient).transfer(request.value);
         request.complete = true;
     }
 }
