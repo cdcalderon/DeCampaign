@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+error Campaign__MayorityHasToApprove();
+
 contract Campaign {
     struct Request {
         string description;
@@ -17,6 +19,7 @@ contract Campaign {
     address public manager;
     uint256 public minimumContribution;
     mapping(address => bool) approvers;
+    uint256 public approversCount;
 
     modifier restricted() {
         require(msg.sender == manager);
@@ -32,6 +35,7 @@ contract Campaign {
         require(msg.value > minimumContribution);
 
         approvers[msg.sender] = true;
+        approversCount++;
     }
 
     function createRequest(
@@ -60,6 +64,9 @@ contract Campaign {
     function finalizeRequest(uint256 index) public restricted {
         Request storage request = requests[index];
 
+        if (request.approvalCount < (approversCount / 2))
+            revert Campaign__MayorityHasToApprove();
+        // require(request.approvalCount > (approversCount / 2));
         require(!request.complete);
 
         request.complete = true;
