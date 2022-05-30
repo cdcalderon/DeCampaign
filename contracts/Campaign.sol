@@ -58,8 +58,10 @@ contract Campaign {
     }
 
     function finalizeRequest(uint256 index) public restricted {
-        require(!requests[index].complete);
+        Request storage request = requests[index];
 
-        requests[index].complete = true;
+        require(!request.complete);
+
+        request.complete = true;
     }
 }
