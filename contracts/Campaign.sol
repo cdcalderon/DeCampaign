@@ -57,5 +57,9 @@ contract Campaign {
         request.approvalCount++;
     }
 
-    function finalizeRequest() public restricted {}
+    function finalizeRequest(uint256 index) public restricted {
+        require(!requests[index].complete);
+
+        requests[index].complete = true;
+    }
 }
