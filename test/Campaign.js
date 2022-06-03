@@ -9,12 +9,12 @@ const {
   ? describe.skip
   : describe("Campaign Unit Tests", () => {
       const chainId = network.config.chainId;
-
+      let campaignContractFactory, campaign;
       beforeEach(async () => {
         const { deployer } = await getNamedAccounts();
         await deployments.fixture(["all"]);
-        raffleContract = await ethers.getContract("Campaign"); // Returns a new connection to the Campaign contract
-        raffle = await ethers.getContract("Campaign", deployer);
+        campaignContractFactory = await ethers.getContractFactory("Campaign"); // Returns a new connection to the Campaign contract
+        campaign = await campaignContractFactory.deploy();
       });
 
       describe("constructor ", () => {
