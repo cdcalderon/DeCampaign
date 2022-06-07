@@ -3,7 +3,7 @@ const { network, deployments, getNamedAccounts, ethers } = require("hardhat");
 const {
   developmentChains,
   networkConfig,
-} = require("../../helper-hardhat-config");
+} = require("../helper-hardhat-config");
 
 !developmentChains.includes(network.name)
   ? describe.skip
